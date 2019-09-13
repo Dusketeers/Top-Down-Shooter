@@ -299,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 16
   maxSpeed: 24
+  bulletVelocity: 10
 --- !u!50 &1660937517
 Rigidbody2D:
   serializedVersion: 4
