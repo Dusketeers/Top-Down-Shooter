@@ -18,6 +18,16 @@ public class PlayerMovement : MonoBehaviour
     public Animator camAnim;
     public Camera cam;            // Used to refrence pixel positions in real word xyz
 
+    public Dictionary<KeyCode, Vector2> keyDict = new Dictionary<KeyCode, Vector2>()
+        {
+            {KeyCode.W, Vector2.up},
+            {KeyCode.A, Vector2.left},
+            {KeyCode.S, Vector2.down },
+            {KeyCode.D, Vector2.right}
+
+        };
+
+
     // Update is called once per frame
     void Update()
     {
@@ -38,38 +48,19 @@ public class PlayerMovement : MonoBehaviour
         rb.rotation = angle;
 
         // Dash Start
-        if (Input.GetButton("Fire2") && Input.GetKey(KeyCode.D))
+        if (Input.GetButton("Fire2"))
         {
-
-            rb.AddForce(Vector2.right * 50, ForceMode2D.Impulse);
-            Instantiate(dashEffect, transform.position, Quaternion.identity);
-            camAnim.SetTrigger("shake");
-        }
-
-        else if (Input.GetButton("Fire2") && Input.GetKey(KeyCode.A))
-        {
-            
-            rb.AddForce(Vector2.left * 50, ForceMode2D.Impulse);
-            Instantiate(dashEffect, transform.position, Quaternion.identity);
-            camAnim.SetTrigger("shake");
-        }
-
-        else if (Input.GetButton("Fire2") && Input.GetKey(KeyCode.S))
-        {
-            
-            rb.AddForce(Vector2.down * 50, ForceMode2D.Impulse);
-            Instantiate(dashEffect, transform.position, Quaternion.identity);
-            camAnim.SetTrigger("shake");
-        }
-
-        else if (Input.GetButton("Fire2") && Input.GetKey(KeyCode.W))
+            foreach (var butt in keyDict)
+            {
+                if (Input.GetKey(butt.Key))
                 {
-            
-            rb.AddForce(Vector2.up * 50, ForceMode2D.Impulse);
-            Instantiate(dashEffect, transform.position, Quaternion.identity);
-            camAnim.SetTrigger("shake");
-        }
-        // Dash End
+                    rb.AddForce(butt.Value * 50, ForceMode2D.Impulse);
+                    Instantiate(dashEffect, transform.position, Quaternion.identity);
+                    camAnim.SetTrigger("shake");
+                }
 
+            }
+            // Dash End
+        }
     }
 }
