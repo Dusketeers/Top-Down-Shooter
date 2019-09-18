@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator camAnim;
     public Camera cam;            // Used to refrence pixel positions in real word xyz
 
-    public Dictionary<KeyCode, Vector2> keyDict = new Dictionary<KeyCode, Vector2>()
+    public Dictionary<KeyCode, Vector2> keyDict = new Dictionary<KeyCode, Vector2>()   // Dictionary for dash keys
         {
             {KeyCode.W, Vector2.up},
             {KeyCode.A, Vector2.left},
@@ -60,7 +60,8 @@ public class PlayerMovement : MonoBehaviour
                 }
 
             }
-            // Dash End
+            
         }
+        // Dash End
     }
 }
