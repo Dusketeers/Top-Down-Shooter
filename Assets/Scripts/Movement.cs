@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Movement : MonoBehaviour
 {
@@ -7,7 +8,6 @@ public class Movement : MonoBehaviour
     public float speed;                //Floating point variable to store the player's movement speed.
     public float maxSpeed;
     public float bulletVelocity = 10;
-    private bool mouseDown = false;
 
     private Rigidbody2D rb2d;        //Store a reference to the Rigidbody2D component required to use 2D Physics.
 
@@ -37,19 +37,18 @@ public class Movement : MonoBehaviour
             {
                 rb2d.AddForce(movement * speed);
             }
-        } else
-        {
-            rb2d.velocity.Scale(new Vector2(0.8f,0.8f));
         }
-        if (Input.GetMouseButtonUp(0))
+        else
         {
-            mouseDown = false;
+            rb2d.velocity.Scale(new Vector2(0.8f, 0.8f));
         }
-        if (Input.GetMouseButtonDown(0) || mouseDown)
+
+        if (Input.GetButtonDown("Fire1"))
         {
             shoot();
-            mouseDown = true;
         }
+
+
     }
 
     private void shoot()
@@ -62,7 +61,7 @@ public class Movement : MonoBehaviour
         var directionVector = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         directionVector.z = 0;
         directionVector = (directionVector - transform.position).normalized;
-     
+
         fireworkRb.velocity = directionVector * bulletVelocity;
     }
 }
