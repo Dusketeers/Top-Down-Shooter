@@ -9,7 +9,7 @@ public class Shoot : MonoBehaviour
 
     public void Start()
     {
-        CurrentWeapon = new Pistol();
+        CurrentWeapon = new Shotgun();
     }
 
     // Update is called once per frame
