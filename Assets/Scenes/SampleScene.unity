@@ -460,7 +460,6 @@ MonoBehaviour:
   firePoint: {fileID: 257758210}
   bulletPrefab: {fileID: 869160850111321818, guid: 31a475e5378e927458bf6c3ec8b9d680,
     type: 3}
-  bulletForce: 20
 --- !u!50 &1660937517
 Rigidbody2D:
   serializedVersion: 4

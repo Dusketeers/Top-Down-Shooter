@@ -1,13 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-    public Transform firePoint;      // The point of firing the projectiles
-    public GameObject bulletPrefab;  // The bullet object
+    public Transform firePoint;
+    [SerializeField] private Weapon currentWeapon;
 
-    public float bulletForce = 20f;
+    public Weapon CurrentWeapon { get => currentWeapon; set => currentWeapon = value; }
+
+    public void Start()
+    {
+        CurrentWeapon = new Pistol();
+    }
 
     // Update is called once per frame
     void Update()
@@ -20,9 +23,13 @@ public class Shoot : MonoBehaviour
 
     void Shooting()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);      // Creating the Bullet in the scene
-        Rigidbody2D rb2d = bullet.GetComponent<Rigidbody2D>();                                      // Getting the Rigidbody component of the bullet
-        rb2d.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);                             // Adding force to the bullet projectile
-
+        if (CurrentWeapon != null)
+        {
+            CurrentWeapon.Shoot(firePoint);
+        } else
+        {
+            Debug.Log("Tried to shoot with no gun.");
+        }
     }
+
 }
