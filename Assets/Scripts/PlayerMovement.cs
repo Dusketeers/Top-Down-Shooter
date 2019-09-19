@@ -48,11 +48,11 @@ public class PlayerMovement : MonoBehaviour
         rb.rotation = angle;
 
         // Dash Start
-        if (Input.GetButton("Fire2"))
+        foreach (var butt in keyDict)
         {
-            foreach (var butt in keyDict)
+            if (Input.GetKey(butt.Key))
             {
-                if (Input.GetKey(butt.Key))
+                if (Input.GetButton("Fire2"))
                 {
                     rb.AddForce(butt.Value * 50, ForceMode2D.Impulse);
                     Instantiate(dashEffect, transform.position, Quaternion.identity);
@@ -60,8 +60,8 @@ public class PlayerMovement : MonoBehaviour
                 }
 
             }
-            
-        }
+
+        }  
         // Dash End
     }
 }

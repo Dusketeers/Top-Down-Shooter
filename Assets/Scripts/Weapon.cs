@@ -31,7 +31,7 @@ public class Shotgun : Weapon
     public float bulletForce = 12f;
     public float bulletTTL = 1f;  // Time To Live
     public float spreadAngleVariance = 30f;
-    public int numberOfBullets = 30;
+    public int numberOfBullets = 20;
 
     private float sampleGaussian()
     {
