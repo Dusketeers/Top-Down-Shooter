@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Heatlh : MonoBehaviour
+public class Health : MonoBehaviour
 {
     public float health;
     public int numOfHearts;
