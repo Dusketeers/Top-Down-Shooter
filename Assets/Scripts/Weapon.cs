@@ -5,10 +5,11 @@ using UnityEditor;
 public abstract class Weapon
 {
     public GameObject bulletPrefab;
+    private static readonly String BULLET_PATH = "Assets/Prefabs/Bullet.prefab";
 
     public Weapon()
     {
-        bulletPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Bullet.prefab", typeof(GameObject));
+        bulletPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(, typeof(GameObject));
     }
 
     public abstract void Shoot(Transform transform);
