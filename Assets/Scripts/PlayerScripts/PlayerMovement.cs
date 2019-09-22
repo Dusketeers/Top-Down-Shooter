@@ -5,26 +5,25 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Vector3 moveDirection;
-    public float movSpeed = 5f;   // Player movement speed variable
+    public float movSpeed = 5f;
     public Rigidbody2D rb;
 
     public GameObject dashEffect;
 
     public Vector2 savedVelocity;
 
-    Vector2 movement;             //  Movement of the player
-    Vector2 mousePos;             //  Storing the mouse position 
+    Vector2 movement;
+    Vector2 mousePos;
 
     public Animator camAnim;
     public Camera cam;            // Used to refrence pixel positions in real word xyz
 
-    public Dictionary<KeyCode, Vector2> keyDict = new Dictionary<KeyCode, Vector2>()   // Dictionary for dash keys
+    private static readonly Dictionary<KeyCode, Vector2> keyDict = new Dictionary<KeyCode, Vector2>()
         {
             {KeyCode.W, Vector2.up},
             {KeyCode.A, Vector2.left},
             {KeyCode.S, Vector2.down },
             {KeyCode.D, Vector2.right}
-
         };
 
 
@@ -41,27 +40,37 @@ public class PlayerMovement : MonoBehaviour
     // Used to execute the commands given inthe Update function
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * movSpeed * Time.fixedDeltaTime);
+        Move();
+        Rotate();
+        if (Input.GetButton("Fire2"))
+        {
+            Dash();
+        }
+    }
 
-        Vector2 lookDir = mousePos - rb.position;                               // Simple vetor math (Ask any explaination if needed)
+    private void Move()
+    {
+        rb.MovePosition(rb.position + movement * movSpeed * Time.fixedDeltaTime);
+    }
+
+    private void Rotate()
+    {
+        Vector2 lookDir = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
+    }
 
-        // Dash Start
+    private void Dash()
+    {
         foreach (var butt in keyDict)
         {
             if (Input.GetKey(butt.Key))
             {
-                if (Input.GetButton("Fire2"))
-                {
-                    rb.AddForce(butt.Value * 50, ForceMode2D.Impulse);
-                    Instantiate(dashEffect, transform.position, Quaternion.identity);
-                    camAnim.SetTrigger("shake");
-                }
-
+                rb.AddForce(butt.Value * 50, ForceMode2D.Impulse);
+                Instantiate(dashEffect, transform.position, Quaternion.identity);
+                camAnim.SetTrigger("shake");
             }
-
-        }  
-        // Dash End
+        }
     }
+}
 }
