@@ -1,12 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawnScript : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
-    private bool canSpawn = true;
     private bool paused = false;
+    private readonly int minEnemies = 4;
+    private readonly int maxEnemies = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +19,13 @@ public class EnemySpawnScript : MonoBehaviour
     {
         if (!paused)
         {
-            SpawnGits();
+            SpawnEnemies();
         }
     }
 
-    public void SpawnGits()
+    public void SpawnEnemies()
     {
-        int enemyNum = Random.Range(4, 10);
+        int enemyNum = Random.Range(minEnemies, maxEnemies);
         for(int i = 0; i < enemyNum; i++)
         {
             GameObject temp = Instantiate(enemy, transform);
