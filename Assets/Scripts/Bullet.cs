@@ -9,14 +9,15 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!float.IsPositiveInfinity(this.timeToLive)) {
+        if (!float.IsPositiveInfinity(this.timeToLive))
+        {
             StartCoroutine(DestroyOnTimeout());
         }
     }
 
     private IEnumerator DestroyOnTimeout()
     {
-        yield return new WaitForSeconds(timeToLive);
+        yield return new WaitForSeconds(1);
         Debug.Log("Destroyed bullet");
         Destroy(this.gameObject);
     }
@@ -25,5 +26,14 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            //do something ex: sound effect, visual effect etc
+            Destroy(gameObject);
+        }
     }
 }

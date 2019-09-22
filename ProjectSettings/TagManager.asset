@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerBullet
   - PlayerCharacter
+  - Wall
   layers:
   - Default
   - TransparentFX

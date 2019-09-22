@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement;
     Vector2 mousePos;
 
-    public Animator camAnim;
+    public Animator camAnim;      // Refrence for the Unity Animator
     public Camera cam;            // Used to refrence pixel positions in real word xyz
 
     private static readonly Dictionary<KeyCode, Vector2> keyDict = new Dictionary<KeyCode, Vector2>()
