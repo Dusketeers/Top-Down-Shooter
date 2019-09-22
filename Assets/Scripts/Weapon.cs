@@ -29,9 +29,9 @@ public class Pistol : Weapon
 public class Shotgun : Weapon
 {
     public float bulletForce = 12f;
-    public float bulletTTL = 1f;  // Time To Live
+    public float bulletTTL = 0.2f;  // Time To Live
     public float spreadAngleVariance = 30f;
-    public int numberOfBullets = 20;
+    public int numberOfBullets = 8;
 
     private float sampleGaussian()
     {
@@ -55,9 +55,10 @@ public class Shotgun : Weapon
             Quaternion aimDirection = transform.rotation;
             Quaternion flyDirection = aimDirection * Quaternion.AngleAxis(randomAngle, Vector3.forward);
             GameObject bullet = MonoBehaviour.Instantiate(bulletPrefab, transform.position, flyDirection);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.timeToLive = bulletTTL;
             Rigidbody2D rb2d = bullet.GetComponent<Rigidbody2D>();
             rb2d.AddForce(bullet.transform.up * bulletForce, ForceMode2D.Impulse);
-            Debug.Log(randomAngle);
         }
     }
 }
