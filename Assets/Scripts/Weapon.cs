@@ -9,7 +9,7 @@ public abstract class Weapon
 
     public Weapon()
     {
-        bulletPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(, typeof(GameObject));
+        bulletPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(BULLET_PATH, typeof(GameObject));
     }
 
     public abstract void Shoot(Transform transform);
