@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 
 public class Health : MonoBehaviour
 {
@@ -16,57 +15,49 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-        setHeartSprites();
-        setEnabledHearts();
-    }
-
-    private void setHeartSprites()
-    {
-        int iHeart = setFullSprites();
-        iHeart = setHalfSprite(iHeart);
-        setEmptySprites(iHeart);
-    }
-
-    private int setFullSprites()
-    {
-        int iHeart = 0;
-        for (; iHeart + 1 <= new float[] { hearts.Length, numOfHearts, health }.Min(); iHeart++)
+        for (int i = 0; i < hearts.Length; i++)
         {
-            hearts[iHeart].sprite = fullHeart;
-        }
-        return iHeart;
-    }
-
-    private int setHalfSprite(int iHeart)
-    {
-        if (health % 1 != 0)
-        {
-            hearts[iHeart].sprite = halfHeart;
-            iHeart++;
-        }
-        return iHeart;
-    }
-
-    private int setEmptySprites(int iHeart)
-    {
-        for (; iHeart + 1 < new float[] { hearts.Length - 1, numOfHearts }.Min(); iHeart++)
-        {
-            hearts[iHeart].sprite = emptyHeart;
-        }
-    }
-
-    private void setEnabledHearts()
-    {
-        for (int iHeart = 0; iHeart < hearts.Length; iHeart++)
-        {
-            if (iHeart < numOfHearts)
+            // Displaying the hearts for the corresponding health
+            if (i < health)
             {
-                hearts[iHeart].enabled = true;
+                hearts[i].sprite = fullHeart;
+
+                // For displaying half hearts. (if someone can make the logic more cleaner would love it. But since we will
+                // be adding enemy damage it might change.)
+                if ((health % 0.5) == 0)
+                {
+                    if (health != 5)
+                    {
+                        for (int j = 0; j <= (health - 0.5); j++)
+                        {
+                            if (j == i)
+                            {
+                                hearts[j].sprite = halfHeart;
+                            }
+                            else
+                            {
+                                hearts[j].sprite = fullHeart;
+                            }
+
+                        }
+                    }
+                    
+                }
             }
             else
             {
-                hearts[iHeart].enabled = false;
+                hearts[i].sprite = emptyHeart;
             }
+
+            // Chnaging total number of hearts/heatlh
+            if (i < numOfHearts)
+            {
+                hearts[i].enabled = true;
+            }else
+            {
+                hearts[i].enabled = false;
+            }
+
         }
     }
 
