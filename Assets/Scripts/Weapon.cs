@@ -21,7 +21,7 @@ public class Pistol : Weapon
 {
     public float bulletForce = 20f;
 
-    public override Sprite pickupSprite => Resources.Load<Sprite> ("Sprites/pistol.png");
+    public override Sprite pickupSprite => Resources.Load<Sprite> ("Sprites/WeaponSprites/pistol");
 
     public override void Shoot(Transform transform)
     {
@@ -38,7 +38,7 @@ public class Shotgun : Weapon
     public float spreadAngleVariance = 30f;
     public int numberOfBullets = 8;
 
-    public override Sprite pickupSprite => Resources.Load<Sprite>("Sprites/shotgun.png");
+    public override Sprite pickupSprite => Resources.Load<Sprite>("Sprites/WeaponSprites/shotgun");
 
     private float sampleGaussian()
     {
