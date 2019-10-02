@@ -7,6 +7,8 @@ public abstract class Weapon
     public GameObject bulletPrefab;
     private static readonly String BULLET_PATH = "Assets/Prefabs/Bullet.prefab";
 
+    public abstract Sprite pickupSprite { get; }
+
     public Weapon()
     {
         bulletPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(BULLET_PATH, typeof(GameObject));
@@ -18,6 +20,8 @@ public abstract class Weapon
 public class Pistol : Weapon
 {
     public float bulletForce = 20f;
+
+    public override Sprite pickupSprite => Resources.Load<Sprite> ("Sprites/pistol.png");
 
     public override void Shoot(Transform transform)
     {
@@ -33,6 +37,8 @@ public class Shotgun : Weapon
     public float bulletTTL = 0.2f;  // Time To Live
     public float spreadAngleVariance = 30f;
     public int numberOfBullets = 8;
+
+    public override Sprite pickupSprite => Resources.Load<Sprite>("Sprites/shotgun.png");
 
     private float sampleGaussian()
     {
